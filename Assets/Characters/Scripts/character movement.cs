@@ -5,22 +5,23 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 25.0f;
-    public float jumpForce = 10.0f;
-    
+    public float jumpForce = 15.0f;
     public float rotationSpeed = 200.0f;
-    public float fallMultiplier = 2.5f;
-    public float lowJumpMultiplier = 2f;
-    public LayerMask groundLayer; 
-    public Transform groundCheck;
+    public float fallMultiplier = 5.0f;
+    public float lowJumpMultiplier = 5.0f;
+    public LayerMask groundMask; 
+    
     private Rigidbody rb;
-    private bool isGrounded;
-    private bool canJump = true; 
+    private bool isGrounded = true;
+    
+    public Transform groundCheck;
     public float groundCheckRadius = 0.2f;
     
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rb.freezeRotation = true;
     }
 
     // Update is called once per frame
@@ -35,17 +36,12 @@ public class PlayerMovement : MonoBehaviour
         float rotation = moveHorizontal * rotationSpeed * Time.deltaTime;
         transform.Rotate(0, rotation, 0);
         
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundCheckRadius, groundMask);
         
-        if (isGrounded && !canJump)
-        {
-            canJump = true;
-        }
-        
-        if (isGrounded && canJump && Input.GetButtonDown("Jump"))
+        if (Input.GetButtonDown("Jump") && isGrounded )
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            canJump = false;
+            isGrounded = false;
         }
         if (rb.velocity.y < 0)
         {
@@ -60,8 +56,12 @@ public class PlayerMovement : MonoBehaviour
     {
         if (groundCheck != null)
         {
-            Gizmos.color = Color.red;
+            Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(groundCheck.position, groundCheckRadius);
+        }
+        else
+        {
+            Gizmos.color = Color.red;
         }
     }
 }
