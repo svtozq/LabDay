@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour
 		float rayLength = 1.1f;
         Debug.DrawRay(groundCheck.position, Vector3.down * rayLength, Color.red); // Visualisation du rayon
         isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, rayLength, groundMask);
-        
+
         if (isGrounded)
         {
             Debug.Log("Le joueur est au sol.");
@@ -54,7 +54,7 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         }
-        
+
         if (rb.velocity.y < 0)
         {
             rb.velocity += Vector3.up * Physics.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
