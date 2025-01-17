@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Tensori/SkinlessZombie/Demo/Night.unity.meta
 guid: 3a49ae63850038c4fa921b17e486989f
+========
+guid: d63e2535f8b214756a8638bdc7f94aa2
+>>>>>>>> ari:Assets/Scenes/Menu-island.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
