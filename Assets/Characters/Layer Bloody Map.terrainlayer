@@ -6,17 +6,17 @@ TerrainLayer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: layer_Cliff_2_DiffuseCliff_2_Normaleda51f90c7f37482
-  m_DiffuseTexture: {fileID: 2800000, guid: 2385b832ab423654a9d220c73d19c8c3, type: 3}
-  m_NormalMapTexture: {fileID: 2800000, guid: debbe2657a1008e4cabc9c52ece0fc1c, type: 3}
+  m_Name: Layer Bloody Map
+  m_DiffuseTexture: {fileID: 2800000, guid: 9db6b06ea6927364e9d7a412560b56e4, type: 3}
+  m_NormalMapTexture: {fileID: 0}
   m_MaskMapTexture: {fileID: 0}
-  m_TileSize: {x: 150, y: 150}
+  m_TileSize: {x: 2, y: 2}
   m_TileOffset: {x: 0, y: 0}
   m_Specular: {r: 0, g: 0, b: 0, a: 0}
   m_Metallic: 0
   m_Smoothness: 0
   m_NormalScale: 1
   m_DiffuseRemapMin: {x: 0, y: 0, z: 0, w: 0}
-  m_DiffuseRemapMax: {x: 1, y: 1, z: 1, w: 1}
+  m_DiffuseRemapMax: {x: 0.3207547, y: 0, z: 0, w: 1}
   m_MaskMapRemapMin: {x: 0, y: 0, z: 0, w: 0}
   m_MaskMapRemapMax: {x: 1, y: 1, z: 1, w: 1}
