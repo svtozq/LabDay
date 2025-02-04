@@ -5,11 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d172c7f-51f9-479c-a09b-2ebdc82507e6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/character movement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/character movement.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Free Island Collection/Environment/Skies/Sky.jpg.meta" beforeDir="false" afterPath="$PROJECT_DIR$/../../Free Island Collection/Environment/Skies/Sky.jpg.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../Scenes/Islands/Island 1.1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/../../Scenes/Islands/Island 1.1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../_TerrainAutoUpgrade/layer_Cliff_2_DiffuseCliff_2_Normaleda51f90c7f37482.terrainlayer" beforeDir="false" afterPath="$PROJECT_DIR$/../../_TerrainAutoUpgrade/layer_Cliff_2_DiffuseCliff_2_Normaleda51f90c7f37482.terrainlayer" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Packages/manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Packages/manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../Packages/packages-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../Packages/packages-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ProjectSettings/ProjectSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ProjectSettings/ProjectSettings.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/../../../ProjectSettings/TagManager.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,15 +30,43 @@
     <setting file="file://$PROJECT_DIR$/../../../Library/PackageCache/com.unity.collab-proxy@2.6.0/Editor/ViewSwitcher.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="false" />
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;git-widget-placeholder&quot;: &quot;Strauss&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2sa7H34QdEt9B5B8ZYAUOjSGd51" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "Strauss",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9d172c7f-51f9-479c-a09b-2ebdc82507e6" name="Changes" comment="" />
+      <created>1738681740644</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1738681740644</updated>
+      <workItem from="1738681741726" duration="11000" />
+    </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="UnityCheckinConfiguration" checkUnsavedScenes="false" />
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
+  <component name="VcsManagerConfiguration">
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
 </project>
