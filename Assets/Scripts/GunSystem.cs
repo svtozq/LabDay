@@ -79,7 +79,7 @@ public class GunSystem : MonoBehaviour
             Invoke("Shoot", timeBetweenShooting);
     }
 
-    private void ResetShot()
+    private void ResetShot()	
     {
         readyToShoot = true;
     }
