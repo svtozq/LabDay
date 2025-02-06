@@ -1,53 +1,148 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class ZombieMovement : MonoBehaviour
+public class ZombieAI2 : MonoBehaviour
 {
-    [Header("Cible à suivre")]
-    public Transform target; // La cible que le zombie doit poursuivre
+    public NavMeshAgent agent;
+    public Transform player;
+    public LayerMask whatIsGround, whatIsPlayer;
+    public float health;
 
-    private NavMeshAgent agent; // Le composant NavMeshAgent du zombie
+    //Patroling
+    public Vector3 walkPoint;
+    bool walkPointSet;
+    public float walkPointRange;
 
-    void Start()
+    //Attacking
+    public float timeBetweenAttacks;
+    bool alreadyAttacked;
+    public GameObject projectile;
+
+    //States
+    public float sightRange, attackRange;
+    public bool playerInSightRange, playerInAttackRange;
+
+    private void Awake()
     {
-        // Récupérer le composant NavMeshAgent
+        player = GameObject.Find("PlayerObj").transform;
         agent = GetComponent<NavMeshAgent>();
 
-        // Vérifications initiales
+        if (player == null)
+            Debug.LogError("Player non trouvé ! Vérifie que l'objet s'appelle bien 'PlayerObj'.");
+
         if (agent == null)
+            Debug.LogError("NavMeshAgent non trouvé ! Vérifie que le composant est attaché au zombie.");
+    }
+
+    private void Update()
+    {
+        // Vérifie les distances de détection du joueur
+        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+        Debug.Log("Player in Sight: " + playerInSightRange + ", Player in Attack: " + playerInAttackRange);
+
+        if (!playerInSightRange && !playerInAttackRange) Patroling();
+        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
+        if (playerInAttackRange && playerInSightRange) AttackPlayer();
+    }
+
+    private void Patroling()
+    {
+        if (!walkPointSet) SearchWalkPoint();
+
+        if (walkPointSet)
         {
-            Debug.LogError("Erreur : Le composant NavMeshAgent est manquant sur " + gameObject.name);
-            enabled = false; // Désactiver le script si le NavMeshAgent est absent
-            return;
+            agent.SetDestination(walkPoint);
+            Debug.Log("Zombie patrouille vers : " + walkPoint);
         }
 
-        if (target == null)
+        Vector3 distanceToWalkPoint = transform.position - walkPoint;
+
+        // Vérifie si le point de marche a été atteint
+        if (distanceToWalkPoint.magnitude < 1f)
         {
-            Debug.LogWarning("Aucune cible assignée au zombie. Assigne une cible dans l'inspecteur.");
+            walkPointSet = false;
+            Debug.Log("Point de patrouille atteint, recherche d'un nouveau point...");
         }
     }
 
-    void Update()
+    private void SearchWalkPoint()
     {
-        // Si une cible est assignée et que le NavMeshAgent est valide
-        if (target != null && agent != null)
-        {
-            // Déplace le zombie vers la cible
-            agent.SetDestination(target.position);
+        float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        float randomX = Random.Range(-walkPointRange, walkPointRange);
 
-            // Vérifier si le zombie est proche de la cible
-            if (agent.remainingDistance <= agent.stoppingDistance)
-            {
-                Debug.Log("Le zombie a atteint la cible !");
-            }
-        }
-        else
+        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
+
+        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
         {
-            // Message de débogage si la cible est manquante
-            if (target == null)
-            {
-                Debug.LogWarning("La cible est toujours manquante !");
-            }
+            walkPointSet = true;
+            Debug.Log("Nouveau point de patrouille trouvé : " + walkPoint);
         }
+    }
+
+    private void ChasePlayer()
+    {
+        if (agent != null && player != null)
+        {
+            agent.SetDestination(player.position);
+            Debug.Log("Zombie poursuit le joueur...");
+        }
+    }
+
+    private void AttackPlayer()
+    {
+        agent.SetDestination(transform.position); // Empêche le zombie de bouger pendant l'attaque
+        transform.LookAt(player);
+        Debug.Log("Zombie attaque le joueur !");
+
+        if (!alreadyAttacked)
+        {
+            if (projectile != null)
+            {
+                Rigidbody rb = Instantiate(projectile, transform.position, Quaternion.identity).GetComponent<Rigidbody>();
+                rb.AddForce(transform.forward * 32f, ForceMode.Impulse);
+                rb.AddForce(transform.up * 8f, ForceMode.Impulse);
+                Debug.Log("Projectile tiré !");
+            }
+            else
+            {
+                Debug.LogError("Projectile non assigné ! Vérifie que l'objet est bien attaché dans l'Inspector.");
+            }
+
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), timeBetweenAttacks);
+        }
+    }
+
+    private void ResetAttack()
+    {
+        alreadyAttacked = false;
+        Debug.Log("Zombie prêt à attaquer à nouveau.");
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log("Zombie a pris " + damage + " de dégâts. Vie restante : " + health);
+
+        if (health <= 0)
+        {
+            Debug.Log("Zombie éliminé !");
+            Invoke(nameof(DestroyEnemy), 0.5f);
+        }
+    }
+
+    private void DestroyEnemy()
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, sightRange);
     }
 }
