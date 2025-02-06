@@ -5,7 +5,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class NewBehaviourScript : MonoBehaviour
+
+public class Optionzzz : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -20,9 +21,10 @@ public class NewBehaviourScript : MonoBehaviour
     }
 
 
- 	 // Fonction pour découvrir l'île (changer de scène)
-   	public void LoadScene ( string islandName )
+    // Fonction pour découvrir l'île (changer de scène)
+    
+    public void StartIsland()
     {
-        SceneManager.LoadScene(islandName); // Changer la scène vers " l.1"
+        SceneManager.LoadScene("Island 1.1");
     }
 }

@@ -10,9 +10,23 @@ public class BoatMovement : MonoBehaviour
     private bool isColliding = false; // Indique si le bateau est en collision
     private Coroutine collisionTimer; // Stocke la coroutine active
 
+    
+    
     void Start()
     {
         GameObject.Find("Options").GetComponent<Canvas>().enabled = false;
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            Component[] components = obj.GetComponents<Component>();
+            foreach (Component comp in components)
+            {
+                if (comp == null)
+                {
+                    Debug.LogWarning($"Objet avec script manquant : {obj.name}", obj);
+                }
+            }
+        }
     }
 
     void Update()
