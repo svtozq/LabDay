@@ -20,6 +20,8 @@ public class GunSystem : MonoBehaviour
     public LayerMask whatIsEnnemy;
     
     public GameObject muzzleFlash, bulletHoleGraphic; 
+    public AudioSource audioSource;
+    public AudioClip gunShotSound;
     // public CamShake camShake;
     public float camShakeMagnitude, camShakeDuration;
     public TextMeshProUGUI text;
@@ -29,6 +31,8 @@ public class GunSystem : MonoBehaviour
     {
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -77,6 +81,8 @@ public class GunSystem : MonoBehaviour
 
        
         Instantiate(muzzleFlash, attackPoint.position, Quaternion.identity);
+        audioSource.PlayOneShot(gunShotSound);
+        
         bulletsLeft--;
         bulletsShot--;
 
