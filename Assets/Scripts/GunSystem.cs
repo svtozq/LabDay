@@ -62,7 +62,7 @@ public class GunSystem : MonoBehaviour
 
         Vector3 direction = fpsCam.transform.forward + new Vector3(x, y, 0);
 
-		Debug.DrawRay(attackPoint.position, direction * range, Color.red, 1f);
+		Debug.DrawRay(attackPoint.position, direction * range, Color.red, 0.01f);
         
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out rayHit, range, whatIsEnnemy))
         {
