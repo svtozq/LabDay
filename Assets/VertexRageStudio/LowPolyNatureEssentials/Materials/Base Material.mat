@@ -49,8 +49,13 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
+<<<<<<< HEAD:Assets/VertexRageStudio/LowPolyNatureEssentials/Materials/Base Material.mat
         m_Texture: {fileID: 2800000, guid: c262afbc083b304498ac9e8e9d2fdf65, type: 3}
         m_Scale: {x: 1, y: 1}
+=======
+        m_Texture: {fileID: 2800000, guid: dde6e30272629694b94f269967739c1a, type: 3}
+        m_Scale: {x: 0.5, y: 0.5}
+>>>>>>> Strauss:Assets/Imports/PalmTreePack/Models/Palm1/Materials/Palm_Center.mat
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}

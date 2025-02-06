@@ -13,6 +13,7 @@ public class FirstPersonCamera : MonoBehaviour
     {
         // Verrouiller le curseur au centre de l'écran
         Cursor.lockState = CursorLockMode.Locked;
+		Cursor.visible = false;
     }
 
     void Update()

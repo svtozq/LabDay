@@ -8,6 +8,26 @@ public class BoatMovement : MonoBehaviour
     public float moveSpeed = 200f; // Vitesse de déplacement avant/arrière
     public float rotationSpeed = 100f; // Vitesse de rotation
     private bool isColliding = false; // Indique si le bateau est en collision
+    private Coroutine collisionTimer; // Stocke la coroutine active
+
+    
+    
+    void Start()
+    {
+        GameObject.Find("Options").GetComponent<Canvas>().enabled = false;
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            Component[] components = obj.GetComponents<Component>();
+            foreach (Component comp in components)
+            {
+                if (comp == null)
+                {
+                    Debug.LogWarning($"Objet avec script manquant : {obj.name}", obj);
+                }
+            }
+        }
+    }
 
     void Update()
     {
@@ -33,6 +53,11 @@ public class BoatMovement : MonoBehaviour
                 transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime);
             }
         }
+        // Fixer la position Y à 280 (éviter que le bateau se noie sur l'axe de Y)
+        transform.position = new Vector3(transform.position.x, 180f, transform.position.z);
+
+        // Fixer la rotation Z à 0 (éviter toute inclinaison)
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -40,16 +65,38 @@ public class BoatMovement : MonoBehaviour
         if (collision.gameObject.tag == "Island")
         {
             Debug.Log("Collision avec une île !");
+            GameObject.Find("Options").GetComponent<Canvas>().enabled = true;
+
             isColliding = true; // Active l'état de collision
+            
+            if (collisionTimer != null)
+            {
+                StopCoroutine(collisionTimer);
+            }
+            collisionTimer = StartCoroutine(CollisionTimer());
         }
+    }
+
+    // Coroutine pour quitter la collision après 2 secondes
+    IEnumerator CollisionTimer()
+    {
+        yield return new WaitForSeconds(10f); // Attendre 2 secondes
+        QuitIsland(); // Appelle la fonction qui quitte la collision
     }
 
     void OnCollisionExit(Collision collision)
     {
         if (collision.gameObject.tag == "Island")
         {
-            Debug.Log("Le bateau a quitté l'île.");
-            isColliding = false; // Désactive l'état de collision
+            QuitIsland();
         }
+    }
+
+    // Fonction pour quitter la collision après 2 secondes
+    void QuitIsland()
+    {
+        GameObject.Find("Options").GetComponent<Canvas>().enabled = false;
+        Debug.Log("Le bateau a quitté l'île.");
+        isColliding = false; // Désactive l'état de collision
     }
 }
