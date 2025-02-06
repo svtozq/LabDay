@@ -22,16 +22,25 @@ public class ZombieAI2 : MonoBehaviour
     public float sightRange, attackRange;
     public bool playerInSightRange, playerInAttackRange;
 
+    //Audio
+    public AudioSource zombieAudioSource; // Composant AudioSource
+    public AudioClip zombieGroan; // Son du zombie
+    public float soundRange = 10f; // Distance pour jouer le son
+
     private void Awake()
     {
         player = GameObject.Find("PlayerObj").transform;
         agent = GetComponent<NavMeshAgent>();
+        zombieAudioSource = GetComponent<AudioSource>();
 
         if (player == null)
             Debug.LogError("Player non trouvé ! Vérifie que l'objet s'appelle bien 'PlayerObj'.");
 
         if (agent == null)
             Debug.LogError("NavMeshAgent non trouvé ! Vérifie que le composant est attaché au zombie.");
+
+        if (zombieAudioSource == null)
+            Debug.LogError("AudioSource non trouvé ! Ajoute un AudioSource au zombie.");
     }
 
     private void Update()
@@ -45,6 +54,12 @@ public class ZombieAI2 : MonoBehaviour
         if (!playerInSightRange && !playerInAttackRange) Patroling();
         if (playerInSightRange && !playerInAttackRange) ChasePlayer();
         if (playerInAttackRange && playerInSightRange) AttackPlayer();
+
+        // Joue un son si le joueur est proche
+        if (Vector3.Distance(transform.position, player.position) < soundRange)
+        {
+            PlayZombieSound();
+        }
     }
 
     private void Patroling()
@@ -59,7 +74,6 @@ public class ZombieAI2 : MonoBehaviour
 
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
 
-        // Vérifie si le point de marche a été atteint
         if (distanceToWalkPoint.magnitude < 1f)
         {
             walkPointSet = false;
@@ -92,7 +106,7 @@ public class ZombieAI2 : MonoBehaviour
 
     private void AttackPlayer()
     {
-        agent.SetDestination(transform.position); // Empêche le zombie de bouger pendant l'attaque
+        agent.SetDestination(transform.position);
         transform.LookAt(player);
         Debug.Log("Zombie attaque le joueur !");
 
@@ -136,6 +150,15 @@ public class ZombieAI2 : MonoBehaviour
     private void DestroyEnemy()
     {
         Destroy(gameObject);
+    }
+
+    private void PlayZombieSound()
+    {
+        if (!zombieAudioSource.isPlaying && zombieGroan != null)
+        {
+            zombieAudioSource.PlayOneShot(zombieGroan);
+            Debug.Log("Le zombie grogne !");
+        }
     }
 
     private void OnDrawGizmosSelected()
