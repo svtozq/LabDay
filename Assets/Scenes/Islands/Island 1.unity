@@ -1247,6 +1247,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 25
   rotationSpeed: 200
+  jumpForce: 15
+  fallMultiplier: 4.5
+  lowJumpMultiplier: 2.5
+  groundMask:
+    serializedVersion: 2
+    m_Bits: 0
+  groundCheck: {fileID: 0}
 --- !u!65 &1271112819
 BoxCollider:
   m_ObjectHideFlags: 0
