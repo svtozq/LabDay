@@ -20,6 +20,7 @@
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Characters/Scripts/ZombieAI2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Characters/Scripts/character animations.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Characters/Scripts/character health.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Characters/Scripts/character movement.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ShootingAi.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/roundSystem.cs" root0="SKIP_HIGHLIGHTING" />
@@ -56,7 +57,7 @@
       <updated>1741349270026</updated>
       <workItem from="1741349272205" duration="317000" />
       <workItem from="1741868940665" duration="3185000" />
-      <workItem from="1742285925632" duration="9690000" />
+      <workItem from="1742285925632" duration="17114000" />
     </task>
     <servers />
   </component>

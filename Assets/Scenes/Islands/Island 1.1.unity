@@ -1869,7 +1869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!215 &1856103339
 ReflectionProbe:
   m_ObjectHideFlags: 0
@@ -1877,7 +1877,7 @@ ReflectionProbe:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1856103338}
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
   m_Type: 0
   m_Mode: 1
@@ -2475,10 +2475,10 @@ SceneRoots:
   m_Roots:
   - {fileID: 984039098}
   - {fileID: 1856103340}
+  - {fileID: 1579178085}
+  - {fileID: 135253136}
   - {fileID: 2121255501}
   - {fileID: 1749702141}
-  - {fileID: 135253136}
-  - {fileID: 1579178085}
   - {fileID: 1533910480}
   - {fileID: 1006497900}
   - {fileID: 1635183628}

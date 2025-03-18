@@ -11,6 +11,10 @@ public class roundSystem : MonoBehaviour
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private TextMeshProUGUI waveText;
     [SerializeField] private TextMeshProUGUI waveCooldownText;
+    [SerializeField] private TextMeshProUGUI waveCooldownText1;
+    [SerializeField] private Material skyMaterial;
+    [SerializeField] private Gradient skyGradient;
+    private float colorChangeSpeed = 0.17f;
     private float cooldown = 5.5f;
     private int waveNumber = 0;
     private float timeBtwWaves = 5.5f;
@@ -24,10 +28,15 @@ public class roundSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        waveCooldownText.enabled = false;
+        waveCooldownText1.enabled = false;
         
-        if (GameObject.FindGameObjectsWithTag("Ennemy").Length <= 0)
+        if (GameObject.FindGameObjectsWithTag("Ennemy").Length <= 0 )
         {
+            waveCooldownText.enabled = true;
+            waveCooldownText1.enabled = true;
             cooldown -= Time.deltaTime;
+            StartCoroutine(ChangeSkyColor());
             
             if (cooldown <= 0f)
             {
@@ -41,6 +50,18 @@ public class roundSystem : MonoBehaviour
         Debug.Log(waveNumber);
     }
 
+    IEnumerator ChangeSkyColor()
+    {
+        float t = 0f; // Time tracker
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime * colorChangeSpeed;
+            skyMaterial.SetColor("_Tint", skyGradient.Evaluate(t));
+            yield return null; // Wait for next frame
+        }
+    }
+
     IEnumerator SpawnWave()
     {
         waveNumber++;
@@ -50,6 +71,7 @@ public class roundSystem : MonoBehaviour
             SpawnEnemy();
             yield return new WaitForSeconds(0.5f);
         }
+        
     }
 
     void SpawnEnemy()
