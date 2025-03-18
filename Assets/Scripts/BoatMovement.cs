@@ -9,11 +9,16 @@ public class BoatMovement : MonoBehaviour
     public float rotationSpeed = 100f; // Vitesse de rotation
     private bool isColliding = false; // Indique si le bateau est en collision
     private Coroutine collisionTimer; // Stocke la coroutine active
+	private float floatAmplitude = 2f; // L’amplitude du mouvement sur l’axe Z
+	private float floatSpeed = 1f; // La vitesse d'oscillation
+	private float initialZRotation; // Sauvegarde la rotation initiale
+
 
     
     
     void Start()
     {
+		initialZRotation = transform.rotation.eulerAngles.z;
         GameObject.Find("Options").GetComponent<Canvas>().enabled = false;
         GameObject[] allObjects = FindObjectsOfType<GameObject>();
         foreach (GameObject obj in allObjects)
@@ -31,6 +36,12 @@ public class BoatMovement : MonoBehaviour
 
     void Update()
     {
+
+		// Applique l'effet de flottement
+   		float zRotation = Mathf.Sin(Time.time * floatSpeed) * floatAmplitude;
+		transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, zRotation);
+
+
         if (!isColliding) // Vérifie si le bateau n'est pas en collision
         {
             // Déplacement avant/arrière
@@ -57,7 +68,11 @@ public class BoatMovement : MonoBehaviour
         transform.position = new Vector3(transform.position.x, 180f, transform.position.z);
 
         // Fixer la rotation Z à 0 (éviter toute inclinaison)
-        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+        //transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
+		Transform cameraTransform = transform.Find("Camera");
+		Vector3 cameraRotation = cameraTransform.eulerAngles;
+		cameraTransform.rotation = Quaternion.Euler(cameraRotation.x, cameraRotation.y, 0);
+
     }
 
     void OnCollisionEnter(Collision collision)
