@@ -10,6 +10,7 @@ public class roundSystem : MonoBehaviour
     [SerializeField] private Transform zombie;
     [SerializeField] private Transform[] spawnPoints;
     [SerializeField] private TextMeshProUGUI waveText;
+    [SerializeField] private TextMeshProUGUI waveText1;
     [SerializeField] private TextMeshProUGUI waveCooldownText;
     [SerializeField] private TextMeshProUGUI waveCooldownText1;
     [SerializeField] private Material skyMaterial;
@@ -17,7 +18,7 @@ public class roundSystem : MonoBehaviour
     [SerializeField] private Gradient skyRedToWhite;
     [SerializeField] private Color colorStart;
     
-    private float colorChangeSpeed = 0.17f;
+    private float colorChangeSpeed = 0.175f;
     private float cooldown;
     private int waveNumber = 0;
     private float timeBtwWaves = 20f;
@@ -35,27 +36,35 @@ public class roundSystem : MonoBehaviour
         waveCooldownText.enabled = false;
         waveCooldownText1.enabled = false;
         
-        if (GameObject.FindGameObjectsWithTag("Ennemy").Length <= 0 )
+        if (GameObject.FindGameObjectsWithTag("Ennemy").Length <= 0 && waveNumber < 2)
         {
             waveCooldownText.enabled = true;
             waveCooldownText1.enabled = true;
             cooldown -= Time.deltaTime;
-            
+
             if (cooldown <= 5.5f && cooldown > 5.4f)
             {
                 StartCoroutine(ChangeSkyColor1());
             }
-            
+
             if (cooldown <= 19.5f && cooldown > 19.4f)
             {
                 StartCoroutine(ChangeSkyColor2());
             }
-            
+
             if (cooldown <= 0f)
             {
                 StartCoroutine(SpawnWave());
                 cooldown = timeBtwWaves;
             }
+        }
+
+        else if (GameObject.FindGameObjectsWithTag("Ennemy").Length <= 0 && waveNumber >= 2)
+        {
+            StartCoroutine(ChangeSkyColor2());
+            waveText.enabled = false;
+            waveText1.enabled = false;
+            return;
         }
         
         waveText.text = Mathf.Floor(waveNumber).ToString();
