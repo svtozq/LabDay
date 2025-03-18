@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlaySoundOnMove : MonoBehaviour
 {
-    public AudioSource audioSource;  // Référence à l'AudioSource
+    public AudioSource audioSource;  
     private Vector3 lastPosition;    // Stocke la dernière position de l'objet
 
     void Start()
