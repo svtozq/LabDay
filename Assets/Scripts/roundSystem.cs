@@ -13,16 +13,20 @@ public class roundSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI waveCooldownText;
     [SerializeField] private TextMeshProUGUI waveCooldownText1;
     [SerializeField] private Material skyMaterial;
-    [SerializeField] private Gradient skyGradient;
+    [SerializeField] private Gradient skyWhiteToRed;
+    [SerializeField] private Gradient skyRedToWhite;
+    [SerializeField] private Color colorStart;
+    
     private float colorChangeSpeed = 0.17f;
-    private float cooldown = 5.5f;
+    private float cooldown;
     private int waveNumber = 0;
-    private float timeBtwWaves = 5.5f;
+    private float timeBtwWaves = 20f;
     
     // Start is called before the first frame update
     void Start()
     {
-        
+        cooldown = 10f;
+        skyMaterial.SetColor("_Tint", colorStart);
     }
 
     // Update is called once per frame
@@ -36,7 +40,16 @@ public class roundSystem : MonoBehaviour
             waveCooldownText.enabled = true;
             waveCooldownText1.enabled = true;
             cooldown -= Time.deltaTime;
-            StartCoroutine(ChangeSkyColor());
+            
+            if (cooldown <= 5.5f && cooldown > 5.4f)
+            {
+                StartCoroutine(ChangeSkyColor1());
+            }
+            
+            if (cooldown <= 19.5f && cooldown > 19.4f)
+            {
+                StartCoroutine(ChangeSkyColor2());
+            }
             
             if (cooldown <= 0f)
             {
@@ -46,18 +59,30 @@ public class roundSystem : MonoBehaviour
         }
         
         waveText.text = Mathf.Floor(waveNumber).ToString();
-        waveCooldownText.text = Mathf.Round(cooldown).ToString();
+        waveCooldownText.text = Mathf.Floor(cooldown).ToString();
         Debug.Log(waveNumber);
     }
 
-    IEnumerator ChangeSkyColor()
+    IEnumerator ChangeSkyColor1()
     {
         float t = 0f; // Time tracker
 
         while (t < 1f)
         {
             t += Time.deltaTime * colorChangeSpeed;
-            skyMaterial.SetColor("_Tint", skyGradient.Evaluate(t));
+            skyMaterial.SetColor("_Tint", skyWhiteToRed.Evaluate(t));
+            yield return null; // Wait for next frame
+        }
+    }
+    
+    IEnumerator ChangeSkyColor2()
+    {
+        float t = 0f; // Time tracker
+
+        while (t < 1f)
+        {
+            t += Time.deltaTime * colorChangeSpeed;
+            skyMaterial.SetColor("_Tint", skyRedToWhite.Evaluate(t));
             yield return null; // Wait for next frame
         }
     }
