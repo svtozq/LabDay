@@ -10,9 +10,23 @@ public class BoatMovement : MonoBehaviour
     private bool isColliding = false; // Indique si le bateau est en collision
     private Coroutine collisionTimer; // Stocke la coroutine active
 
+    
+    
     void Start()
     {
         GameObject.Find("Options").GetComponent<Canvas>().enabled = false;
+        GameObject[] allObjects = FindObjectsOfType<GameObject>();
+        foreach (GameObject obj in allObjects)
+        {
+            Component[] components = obj.GetComponents<Component>();
+            foreach (Component comp in components)
+            {
+                if (comp == null)
+                {
+                    Debug.LogWarning($"Objet avec script manquant : {obj.name}", obj);
+                }
+            }
+        }
     }
 
     void Update()
@@ -40,7 +54,7 @@ public class BoatMovement : MonoBehaviour
             }
         }
         // Fixer la position Y à 280 (éviter que le bateau se noie sur l'axe de Y)
-        transform.position = new Vector3(transform.position.x, 280f, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 180f, transform.position.z);
 
         // Fixer la rotation Z à 0 (éviter toute inclinaison)
         transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
@@ -66,7 +80,7 @@ public class BoatMovement : MonoBehaviour
     // Coroutine pour quitter la collision après 2 secondes
     IEnumerator CollisionTimer()
     {
-        yield return new WaitForSeconds(2f); // Attendre 2 secondes
+        yield return new WaitForSeconds(10f); // Attendre 2 secondes
         QuitIsland(); // Appelle la fonction qui quitte la collision
     }
 
