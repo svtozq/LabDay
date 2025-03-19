@@ -5,18 +5,41 @@ using UnityEngine;
 public class Pausescript : MonoBehaviour
 {
     public GameObject canvas;
-    // Start is called before the first frame update
+    private bool isPaused = false;
+    private float toggleCooldown = 0.2f; // Cooldown to prevent instant re-toggle
+    private float nextToggleTime = 0f;
+
     void Start()
     {
         canvas.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.P)) {
+        // Ensure enough time has passed before allowing another toggle
+        if (Time.unscaledTime > nextToggleTime && Input.GetKeyDown(KeyCode.P))
+        {
+            TogglePause();
+            nextToggleTime = Time.unscaledTime + toggleCooldown; // Set the next allowed toggle time
+        }
+    }
+
+    void TogglePause()
+    {
+        isPaused = !isPaused;
+
+        if (isPaused)
+        {
             canvas.SetActive(true);
-        }  
+            Time.timeScale = 0f;
+            Debug.Log("- Game paused -");
+        }
+        else
+        {
+            canvas.SetActive(false);
+            Time.timeScale = 1f;
+            Debug.Log("- Game resumed -");
+        }
     }
 
     void OnPause()

@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="41de15fe-822b-447d-8369-10c2892da18a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LabDay/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LabDay/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Characters/Scripts/ZombieAI2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/Scripts/ZombieAI2.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Characters/Scripts/character health.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/Scripts/character health.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/Island/Standard/Island_2019.3.15_Standard.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/Island/URP/Island_2019.3.15_URP.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Imports/LowPolyTropicalEnvironment_LITE/TropicalEnvironmentLite_2021.3.0_URP_1.0.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VertexRageStudio/LowPolyNatureEssentials/SRP/HDRP.unitypackage.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/VertexRageStudio/LowPolyNatureEssentials/SRP/URP.unitypackage.meta" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,12 +21,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Characters/Scripts/WaveManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Characters/Scripts/ZombieAI2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Characters/Scripts/character animations.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Characters/Scripts/character health.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Characters/Scripts/character movement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GunSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ShootingAi.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/roundSystem.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/iswalking.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
   <component name="ProblemsViewState">

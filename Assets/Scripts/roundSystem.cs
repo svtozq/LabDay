@@ -13,6 +13,8 @@ public class roundSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI waveText1;
     [SerializeField] private TextMeshProUGUI waveCooldownText;
     [SerializeField] private TextMeshProUGUI waveCooldownText1;
+    [SerializeField] private GameObject victoryCanva;
+    [SerializeField] private GameObject HealthBar;
     [SerializeField] private Material skyMaterial;
     [SerializeField] private Gradient skyWhiteToRed;
     [SerializeField] private Gradient skyRedToWhite;
@@ -28,6 +30,7 @@ public class roundSystem : MonoBehaviour
     {
         cooldown = 10f;
         skyMaterial.SetColor("_Tint", colorStart);
+        victoryCanva.SetActive(false);
     }
 
     // Update is called once per frame
@@ -36,7 +39,7 @@ public class roundSystem : MonoBehaviour
         waveCooldownText.enabled = false;
         waveCooldownText1.enabled = false;
         
-        if (GameObject.FindGameObjectsWithTag("Ennemy").Length <= 0 && waveNumber < 3)
+        if (GameObject.FindGameObjectsWithTag("Ennemy").Length <= 0 && waveNumber < 5)
         {
             waveCooldownText.enabled = true;
             waveCooldownText1.enabled = true;
@@ -59,9 +62,11 @@ public class roundSystem : MonoBehaviour
             }
         }
 
-        else if (GameObject.FindGameObjectsWithTag("Ennemy").Length <= 0 && waveNumber >= 3)
+        else if (GameObject.FindGameObjectsWithTag("Ennemy").Length <= 0 && waveNumber >= 5)
         {
             StartCoroutine(ChangeSkyColor2());
+            victoryCanva.SetActive(true);
+            HealthBar.SetActive(false);
             waveText.enabled = false;
             waveText1.enabled = false;
             waveCooldownText.enabled = false;
