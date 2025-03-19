@@ -1250,6 +1250,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: menu settings
       objectReference: {fileID: 0}
+    - target: {fileID: 2144304760084568265, guid: 34cfd00bcb6cd416b9e184a427ade32d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4786139319920811894, guid: 34cfd00bcb6cd416b9e184a427ade32d,
         type: 3}
       propertyPath: m_Pivot.x
@@ -3710,7 +3715,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57aa6f3a04aef4009b697e48c80c39d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canva: {fileID: 1406418287}
 --- !u!1001 &1407564194
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4038,42 +4042,42 @@ PrefabInstance:
     - target: {fileID: 540133912797539950, guid: 9577f28977caa4818851b6e339cdd99b,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 540133912797539950, guid: 9577f28977caa4818851b6e339cdd99b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 540133912797539950, guid: 9577f28977caa4818851b6e339cdd99b,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2238654244190882706, guid: 9577f28977caa4818851b6e339cdd99b,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2238654244190882706, guid: 9577f28977caa4818851b6e339cdd99b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2238654244190882706, guid: 9577f28977caa4818851b6e339cdd99b,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2252522045736678386, guid: 9577f28977caa4818851b6e339cdd99b,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2252522045736678386, guid: 9577f28977caa4818851b6e339cdd99b,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3526574903340428857, guid: 9577f28977caa4818851b6e339cdd99b,
         type: 3}
@@ -4085,15 +4089,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: Settings
       objectReference: {fileID: 0}
-    - target: {fileID: 6591734840723334524, guid: 9577f28977caa4818851b6e339cdd99b,
+    - target: {fileID: 5302002713557037462, guid: 9577f28977caa4818851b6e339cdd99b,
         type: 3}
-      propertyPath: m_AnchorMax.x
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6591734840723334524, guid: 9577f28977caa4818851b6e339cdd99b,
         type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6591734840723334524, guid: 9577f28977caa4818851b6e339cdd99b,
+        type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8354667260850807024, guid: 9577f28977caa4818851b6e339cdd99b,
         type: 3}
@@ -4710,7 +4719,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89fe8d3fe81124041a6850f8026c0956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canva: {fileID: 1406418287}
 --- !u!1001 &1749702141
 PrefabInstance:
   m_ObjectHideFlags: 0
