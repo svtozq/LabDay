@@ -13,18 +13,10 @@ public class FirstPersonCamera : MonoBehaviour
     {
         // Verrouiller le curseur au centre de l'écran
         Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
     }
 
     void Update()
     {
-        // Vérification de la référence du playerBody
-        if (playerBody == null)
-        {
-            Debug.LogError("Le playerBody n'est pas assigné dans l'inspecteur !");
-            return;
-        }
-
         // Récupérer les mouvements de la souris
         float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
         float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
