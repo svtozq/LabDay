@@ -10,7 +10,7 @@ public class BoatMovement : MonoBehaviour
     private bool isColliding = false; // Indique si le bateau est en collision
     private Coroutine collisionTimer; // Stocke la coroutine active
 	private float floatAmplitude = 2f; // L’amplitude du mouvement sur l’axe Z
-	private float floatSpeed = 1f; // La vitesse d'oscillation
+	private float floatSpeed = 2.3f; // La vitesse d'oscillation
 	private float initialZRotation; // Sauvegarde la rotation initiale
 
 
