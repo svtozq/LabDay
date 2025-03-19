@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="41de15fe-822b-447d-8369-10c2892da18a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.LabDay/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.LabDay/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Islands/Island 1.1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Islands/Island 1.1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/roundSystem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/roundSystem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tensori/SkinlessZombie/Art/Textures/Built-In/builtIn.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Tensori/SkinlessZombie/Art/Textures/URP/URP.unitypackage.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Characters/Scripts/ZombieAI2.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/Scripts/ZombieAI2.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Characters/Scripts/character health.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Characters/Scripts/character health.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,16 +18,17 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Characters/Scripts/WaveManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Characters/Scripts/ZombieAI2.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Characters/Scripts/character animations.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Characters/Scripts/character health.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Characters/Scripts/character movement.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GunSystem.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/ShootingAi.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/roundSystem.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -64,7 +62,7 @@
       <workItem from="1741349272205" duration="317000" />
       <workItem from="1741868940665" duration="3185000" />
       <workItem from="1742285925632" duration="19614000" />
-      <workItem from="1742389271044" duration="2959000" />
+      <workItem from="1742389271044" duration="5041000" />
     </task>
     <servers />
   </component>

@@ -117,6 +117,12 @@ public class ZombieAI : MonoBehaviour
             // ⚔ Joue l'animation d'attaque
             animator.SetBool("isAttacking", true);
             Debug.Log("💥 Le zombie attaque le joueur !");
+
+			characterHealth playerHealth = player.GetComponent<characterHealth>();
+        	if (playerHealth != null)
+        	{
+            	playerHealth.TakeDamage(attackDamage); // Deal damage
+        	}
             
             alreadyAttacked = true; // Empêche l'attaque multiple immédiate
             Invoke(nameof(ResetAttack), attackCooldown); // Relance l'attaque après un certain temps

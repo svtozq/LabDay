@@ -22,4 +22,21 @@ public class characterHealth : MonoBehaviour
     {
         
     }
+    
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        healthBar.fillAmount = health / maxHealth;
+
+        if (health <= 0)
+        {
+            Die();
+        }
+    }
+    
+    void Die()
+    {
+        Debug.Log("Character has died!");
+        Destroy(gameObject);
+    }
 }
