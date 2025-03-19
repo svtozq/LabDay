@@ -36,7 +36,7 @@ public class roundSystem : MonoBehaviour
         waveCooldownText.enabled = false;
         waveCooldownText1.enabled = false;
         
-        if (GameObject.FindGameObjectsWithTag("Ennemy").Length <= 0 && waveNumber < 2)
+        if (GameObject.FindGameObjectsWithTag("Ennemy").Length <= 0 && waveNumber < 3)
         {
             waveCooldownText.enabled = true;
             waveCooldownText1.enabled = true;
@@ -59,17 +59,19 @@ public class roundSystem : MonoBehaviour
             }
         }
 
-        else if (GameObject.FindGameObjectsWithTag("Ennemy").Length <= 0 && waveNumber >= 2)
+        else if (GameObject.FindGameObjectsWithTag("Ennemy").Length <= 0 && waveNumber >= 3)
         {
             StartCoroutine(ChangeSkyColor2());
             waveText.enabled = false;
             waveText1.enabled = false;
+            waveCooldownText.enabled = false;
+            waveCooldownText1.enabled = false;
             return;
         }
         
         waveText.text = Mathf.Floor(waveNumber).ToString();
         waveCooldownText.text = Mathf.Floor(cooldown).ToString();
-        Debug.Log(waveNumber);
+        Debug.Log("Start wave " + waveNumber + " ..");
     }
 
     IEnumerator ChangeSkyColor1()
