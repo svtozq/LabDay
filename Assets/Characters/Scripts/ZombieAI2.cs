@@ -4,75 +4,97 @@ using System;
 
 public class ZombieAI : MonoBehaviour
 {
-    // 🎯 [Header] Catégorisation des variables dans l'inspecteur Unity
     [Header("Composants")]
-    private NavMeshAgent agent; // Composant permettant au zombie de se déplacer sur le terrain
-    private Animator animator;  // Gère les animations du zombie
-    private Transform player;   // Stocke la position du joueur
+    private NavMeshAgent agent;
+    private Animator animator;
+    private Transform player;
 
     [Header("Données")]
-    public float health = 100f; // Vie du zombie
+    public float health = 100f;
 
     [Header("Détection")]
-    public LayerMask whatIsGround, whatIsPlayer; // Couches pour détecter le sol et le joueur
-    public float sightRange = 120f, attackRange = 15f; // Distance de vision et d'attaque
-    private bool playerInSightRange, playerInAttackRange; // Indique si le joueur est dans la zone de vision ou d'attaque
+    public LayerMask whatIsGround, whatIsPlayer;
+    public float sightRange = 200f, attackRange = 20f;
+    private bool playerInSightRange, playerInAttackRange;
 
     [Header("Patrouille")]
-    private Vector3 walkPoint; // Position cible lors de la patrouille
-    private bool walkPointSet; // Vérifie si un point de patrouille a été défini
-    public float walkPointRange; // Rayon dans lequel le zombie cherche un point de patrouille
+    private Vector3 walkPoint;
+    private bool walkPointSet;
+    public float walkPointRange;
 
     [Header("Attaque")]
-    public float attackCooldown = 1.5f; // Temps d'attente entre deux attaques
-    private bool alreadyAttacked; // Vérifie si le zombie a déjà attaqué récemment
-    public int attackDamage = 10; // Dégâts infligés par le zombie
+    public float attackCooldown = 1.5f;
+    private bool alreadyAttacked;
+    public int attackDamage = 20;
 
-    public event Action OnDeath; // Événement pour signaler au WaveManager qu'un zombie est mort
+    public event Action OnDeath;
 
     private void Awake()
     {
-        // 🔄 Récupère les composants attachés au zombie
-        agent = GetComponent<NavMeshAgent>(); // Récupère le composant de navigation
-        animator = GetComponent<Animator>();  // Récupère le gestionnaire d'animations
-
-        // 🔎 Trouve le joueur dans la scène
+        agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
+        
         GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
         if (playerObj != null)
-            player = playerObj.transform; // Stocke la position du joueur
+            player = playerObj.transform;
         else
             Debug.LogError("⚠️ Le joueur n'a pas été trouvé ! Vérifie son tag.");
     }
 
+    private void Start()
+    {
+        if (agent == null)
+        {
+            Debug.LogError("❌ NavMeshAgent manquant sur " + gameObject.name);
+        }
+        else
+        {
+            agent.isStopped = false;
+            agent.speed = 90f;
+            Debug.Log("✅ NavMeshAgent initialisé avec succès !");
+        }
+    }
+
     private void Update()
     {
-        // 🧐 Vérifie si le joueur est visible ou à portée d'attaque
         playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
         playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-        // 🚶 Si le joueur n'est pas visible, patrouille
-        if (!playerInSightRange && !playerInAttackRange) Patrolling();
-        // 🏃 Si le joueur est visible mais hors d'attaque, poursuite
-        if (playerInSightRange && !playerInAttackRange) ChasePlayer();
-        // ⚔ Si le joueur est à portée d'attaque, attaque !
-        if (playerInAttackRange && playerInSightRange) AttackPlayer();
+        Debug.Log($"📍 Player détecté: {playerInSightRange}, Player en attaque: {playerInAttackRange}");
+
+        if (!playerInSightRange && !playerInAttackRange)
+        {
+            Debug.Log("🚶‍♂️ Zombie en patrouille...");
+            Patrolling();
+        }
+        if (playerInSightRange && !playerInAttackRange)
+        {
+            Debug.Log("🏃‍♂️ Zombie poursuit le joueur !");
+            ChasePlayer();
+        }
+        if (playerInAttackRange && playerInSightRange)
+        {
+            Debug.Log("💥 Zombie attaque le joueur !");
+            AttackPlayer();
+        }
     }
 
     private void Patrolling()
     {
-        // 👀 Si aucun point de patrouille n'est défini, en chercher un
         if (!walkPointSet) SearchWalkPoint();
-
-        // 🏃 Si un point est défini, s'y rendre
-        if (walkPointSet) agent.SetDestination(walkPoint);
-
-        // 📏 Mesure la distance entre le zombie et son objectif
+        if (walkPointSet)
+        {
+            agent.SetDestination(walkPoint);
+            Debug.Log($"🧭 Zombie se dirige vers un point de patrouille: {walkPoint}");
+        }
+        
         Vector3 distanceToWalkPoint = transform.position - walkPoint;
+        if (distanceToWalkPoint.magnitude < 1f) 
+        {
+            walkPointSet = false;
+            Debug.Log("🔄 Nouveau point de patrouille nécessaire !");
+        }
 
-        // ✅ Si le zombie est arrivé à destination, chercher un nouveau point
-        if (distanceToWalkPoint.magnitude < 1f) walkPointSet = false;
-
-        // 🎭 Active l'animation de marche
         animator.SetBool("isWalking", true);
         animator.SetBool("isRunning", false);
         animator.SetBool("isAttacking", false);
@@ -80,24 +102,25 @@ public class ZombieAI : MonoBehaviour
 
     private void SearchWalkPoint()
     {
-        // 🎲 Génère un point aléatoire dans un certain rayon autour du zombie
         float randomZ = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
         float randomX = UnityEngine.Random.Range(-walkPointRange, walkPointRange);
         walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
 
-        // 🛑 Vérifie que le point est bien sur le sol avant de l'accepter
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
+        {
             walkPointSet = true;
+            Debug.Log($"🔍 Nouveau point de patrouille trouvé: {walkPoint}");
+        }
     }
 
     private void ChasePlayer()
     {
-        // 🏃 Si le zombie et le joueur existent bien, poursuivre le joueur
         if (agent != null && player != null)
         {
-            agent.SetDestination(player.position); // Oriente le zombie vers le joueur
+            Debug.Log($"🚀 Zombie se dirige vers le joueur à la position {player.position}");
+            agent.isStopped = false;
+            agent.SetDestination(player.position);
 
-            // 🔄 Change l'animation en mode "course"
             animator.SetBool("isWalking", false);
             animator.SetBool("isRunning", true);
             animator.SetBool("isAttacking", false);
@@ -106,62 +129,39 @@ public class ZombieAI : MonoBehaviour
 
     private void AttackPlayer()
     {
-        // 🛑 Stoppe le mouvement du zombie quand il attaque
-        agent.SetDestination(transform.position);
-
-        // 👀 Regarde le joueur pour attaquer
+        agent.isStopped = true;
         transform.LookAt(player);
 
         if (!alreadyAttacked)
         {
-            // ⚔ Joue l'animation d'attaque
             animator.SetBool("isAttacking", true);
             Debug.Log("💥 Le zombie attaque le joueur !");
-            
-            alreadyAttacked = true; // Empêche l'attaque multiple immédiate
-            Invoke(nameof(ResetAttack), attackCooldown); // Relance l'attaque après un certain temps
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), attackCooldown);
         }
     }
 
     private void ResetAttack()
     {
-        // 🔄 Permet au zombie d'attaquer à nouveau après un délai
         alreadyAttacked = false;
+        agent.isStopped = false;
+        Debug.Log("🔄 Le zombie peut attaquer à nouveau !");
     }
 
     public void TakeDamage(int damage)
     {
-        // 💔 Réduit la vie du zombie lorsqu'il prend des dégâts
         health -= damage;
-        
-        // ☠️ Si la vie tombe à 0, le zombie meurt
-        if (health <= 0) Die();
-    }
+        Debug.Log($"🩸 Le zombie a pris {damage} dégâts, vie restante: {health}");
 
-    public void SetStats(float healthMultiplier, float speedMultiplier)
-    {
-        // 💪 Augmente la vie du zombie selon un multiplicateur
-        health *= healthMultiplier;
-        
-        // 🏃 Augmente la vitesse du zombie selon un multiplicateur
-        agent.speed *= speedMultiplier;
+        if (health <= 0) Die();
     }
 
     private void Die()
     {
-        // ☠ Affiche un message dans la console quand le zombie meurt
         Debug.Log("☠️ Zombie éliminé !");
-        
-        // 🎭 Lance l'animation de mort
         animator.SetTrigger("Die");
-        
-        // ⛔ Empêche le zombie de bouger après sa mort
         agent.isStopped = true;
-        
-        // 📢 Informe le WaveManager que ce zombie est mort
         OnDeath?.Invoke();
-
-        // 🗑️ Détruit l'objet zombie après 2 secondes
         Destroy(gameObject, 2f);
     }
 }
