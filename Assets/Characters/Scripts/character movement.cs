@@ -30,16 +30,17 @@ public class PlayerMovement : MonoBehaviour
     {
         float moveVertical = Input.GetAxis("Vertical");
         Vector3 forwardMovement = transform.forward * moveVertical * speed;
-        Vector3 newPosition = rb.position + forwardMovement * Time.deltaTime;
-        rb.MovePosition(newPosition);
+        Vector3 newPositionVertical = rb.position + forwardMovement * Time.deltaTime;
+        rb.MovePosition(newPositionVertical);
         
         float moveHorizontal = Input.GetAxis("Horizontal");
-        float rotation = moveHorizontal * rotationSpeed * Time.deltaTime;
-        transform.Rotate(0, rotation, 0);
+        Vector3 sideMovement = transform.right * moveHorizontal * speed;
+        Vector3 newPositionSide = rb.position + sideMovement * Time.deltaTime;
+        rb.MovePosition(newPositionSide);
 
-		float rayLength = 1.1f;
+		float rayLength = 2.1f;
         Debug.DrawRay(groundCheck.position, Vector3.down * rayLength, Color.red); // Visualisation du rayon
-        isGrounded = Physics.Raycast(groundCheck.position, Vector3.down, rayLength, groundMask);
+        isGrounded = Physics.CheckSphere(groundCheck.position, rayLength, groundMask);
 
         if (isGrounded)
         {
@@ -64,5 +65,11 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity += Vector3.up * Physics.gravity.y * (lowJumpMultiplier - 1) * Time.deltaTime;
         }
 
+    }
+    private void OnDrawGizmosSelected()
+    {
+        float rayLength = 2.1f;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(groundCheck.position, rayLength);
     }
 }
