@@ -1,8 +1,15 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Characters/Animations/SKELETON/Skeleton Attack Anim.anim.meta
 guid: 790b0afbd056c4a81991a7e485ae6602
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 7400000
+========
+guid: 3142196e6ab554a188533335e950cf75
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 15600000
+>>>>>>>> main:Assets/TerrainData_027ab807-51ae-41d6-9010-4341cf6ea523.asset.meta
   userData: 
   assetBundleName: 
   assetBundleVariant: 
